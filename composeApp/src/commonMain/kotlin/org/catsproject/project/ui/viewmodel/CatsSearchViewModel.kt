@@ -43,6 +43,9 @@ class CatsSearchViewModel(
     private val _error = MutableStateFlow<String?>(null)
     val error = _error.asStateFlow()
 
+    private val _errorMore = MutableStateFlow<Boolean>(false)
+    val errorMore = _errorMore.asStateFlow()
+
 
     private val _currentPage = MutableStateFlow<Int>(0)
     val currentPage: StateFlow<Int> = _currentPage
@@ -129,6 +132,11 @@ class CatsSearchViewModel(
                     getCatsPageOnce()
                     setCurrentPage(1)
                 }.onFailure {
+                    _errorMore.update {
+                        true
+                    }
+                    getCatsPageOnce()
+                    setCurrentPage(1)
                     println("Error: ${it.message}")
                 }
 
@@ -154,11 +162,16 @@ class CatsSearchViewModel(
             try {
                 isLoadingMore = true
                 _error.value = null
+                _errorMore.value = false
                 getCatsCatalogCatsApi(currentPage.value).onSuccess {
                     val nextPage = currentPage.value + 1
                     getCatsPageOnce()
                     setCurrentPage(nextPage)
                 }.onFailure {
+                    _errorMore.update {
+                        true
+                    }
+                    getCatsPageOnce()
                     println("Error: ${it.message}")
                 }
             } catch (e: Exception) {

@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import catscatalog.composeapp.generated.resources.Res
+import catscatalog.composeapp.generated.resources.ic_box_app
 import catscatalog.composeapp.generated.resources.ic_favorite
 
 import org.catsproject.project.ui.navigation.NavigationEnum
@@ -64,7 +65,7 @@ fun ModalDrawer(
                                 if (taps == NavigationEnum.CATALOG) Modifier.background(GrayBlur) else Modifier
                             ),
                         text = "Catalog",
-                        icon = Res.drawable.ic_favorite
+                        icon = Res.drawable.ic_box_app
                     ) {
 
                         if (taps != NavigationEnum.CATALOG) {

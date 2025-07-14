@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.catsproject.project.core.di.isDesktop
+import org.catsproject.project.ui.view.AlertFailCats
 import org.catsproject.project.ui.view.CardCatalog
 import org.catsproject.project.ui.view.PullToRefreshContainer
 import org.catsproject.project.ui.viewmodel.CatsSearchViewModel
@@ -42,16 +43,27 @@ fun PullRefreshView(
     val listCat by vm.catsList.collectAsStateWithLifecycle()
     val isLoading by vm.isLoading.collectAsStateWithLifecycle()
     val refreshing by vm.isRefreshing.collectAsStateWithLifecycle()
+    val errorMore by vm.errorMore.collectAsStateWithLifecycle()
+    val error by vm.error.collectAsStateWithLifecycle()
     val interactionSource = remember { MutableInteractionSource() }
 
 
 
-    if (listCat.isEmpty()){
+
+
+
+    if (listCat.isEmpty() && !errorMore){
         Box(Modifier.fillMaxSize(),contentAlignment = Alignment.Center){
             CircularProgressIndicator()
         }
 
-    }else{
+    }else if (errorMore && listCat.isEmpty()){
+        Box(Modifier.fillMaxSize(),contentAlignment = Alignment.Center){
+            AlertFailCats(error ?: ""){
+                vm.loadMoreCats()
+            }
+        }
+    } else{
         PullToRefreshContainer(
             modifier = Modifier.fillMaxSize(),
             isRefreshing = refreshing,
@@ -116,6 +128,8 @@ fun PullRefreshView(
             }
         }
     }
+
+
 
 
 
