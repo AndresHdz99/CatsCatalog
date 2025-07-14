@@ -128,7 +128,8 @@ The project is structured following the **MVVM (Model-View-ViewModel)** pattern 
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/ed377926-cffa-423b-9fb5-3458adaa4d3c" width="400" alt="Desktop Screen 3">
-  <img src="https://github.com/user-attachments/assets/441b9732-3250-4663-8f16-64f4852fe619" width="400" alt="Desktop Screen 4">
+  <img src="https://github.com/user-attachments/assets/fdbc04f3-779f-47d0-8d12-e71c9ec31650" width="400" alt="Desktop Screen 4">
+  
 </div>
 
 ---
