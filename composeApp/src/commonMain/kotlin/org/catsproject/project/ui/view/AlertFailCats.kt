@@ -43,9 +43,9 @@ fun AlertFailCats(text:String,onClick:()->Unit) {
     Column(modifier = Modifier
         .fillMaxWidth(0.7f)
         .shadow(
-            elevation = 8.dp,               // tamaño de la sombra
-            shape = RoundedCornerShape(16.dp), // forma de los bordes
-            clip = true                    // opcional: recorta el contenido al shape
+            elevation = 8.dp,
+            shape = RoundedCornerShape(16.dp),
+            clip = true
         )
         .clip(RoundedCornerShape(30.dp))
 
