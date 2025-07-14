@@ -165,6 +165,9 @@ Password: user123
 <div align="center">
   https://drive.google.com/drive/folders/10KFpCJQmO_HuBiRbHtb8jjnOoVE8vZvP?usp=sharing
 </div>
+<div align="center">
+  "Currently available only for Mac devices and Android mobile devices."
+</div>
 
 
 <div align="center">
