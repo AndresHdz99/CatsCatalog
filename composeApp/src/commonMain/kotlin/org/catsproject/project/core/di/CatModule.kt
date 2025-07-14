@@ -22,50 +22,44 @@ import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 import com.russhwolf.settings.Settings
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
 import org.catsproject.project.core.ViewModelResetManager
+import org.catsproject.project.data.database.configure.RealmDatabase
 import org.catsproject.project.data.database.datasource.FavoriteCatsDataSource
 import org.catsproject.project.data.database.datasource.RealmCatsFavorite
 import org.catsproject.project.data.database.domin.DeleteCatMyFavorite
 import org.catsproject.project.data.database.domin.GetListFavorites
+import org.catsproject.project.data.database.models.CatsEntity
+import org.catsproject.project.data.database.models.FavoriteUserEntity
 import org.catsproject.project.data.database.repository.CatsFavoriteBaseRepository
 import org.catsproject.project.data.database.repository.CatsFavoriteBaseRepositoryImpl
 import org.catsproject.project.data.network.domain.GetCatsPageDataBase
 import org.catsproject.project.ui.viewmodel.FavoriteViewModel
 
 
+
 val dataBase = module {
 
-    single<CatsDataSource> { RealmCatsDataSource() }
+    single {  RealmDatabase.realm }
+
+    single<CatsDataSource> { RealmCatsDataSource(get()) }
 
     single<CatsDataBaseRepository> { CatsDataBaseRepositoryImpl(get()) }
 
-    single<CatsDataBaseRepositoryImpl> { CatsDataBaseRepositoryImpl(
-        catsDataSource = get()
-    ) }
+    single<CatsDataBaseRepositoryImpl> { CatsDataBaseRepositoryImpl(catsDataSource = get()) }
 
 
-    single<FavoriteCatsDataSource> { RealmCatsFavorite() }
+    single<FavoriteCatsDataSource> { RealmCatsFavorite(get ()) }
 
     single<CatsFavoriteBaseRepository> { CatsFavoriteBaseRepositoryImpl(get()) }
 
-    single <CatsFavoriteBaseRepositoryImpl>{
-        CatsFavoriteBaseRepositoryImpl(
-            favoriteCatsDataSource = get ()
-        )
-    }
 
+    single<AddCatMyFavorite> { AddCatMyFavorite(get()) }
 
-    single<AddCatMyFavorite> {
-        AddCatMyFavorite(
-           catsFavoriteBaseRepositoryImpl = get()
-        )
-    }
-
-    single<DeleteCatMyFavorite> {
-        DeleteCatMyFavorite(
-            get()
-        )
-    }
+    single<DeleteCatMyFavorite> { DeleteCatMyFavorite(
+        get()
+    ) }
 
     single<GetCatInformationDB> {
         GetCatInformationDB(
@@ -84,7 +78,7 @@ val dataBase = module {
         getCatInformationDB = get(),
         addCatMyFavorite = get(),
         deleteCatMyFavorite = get(),
-        sessionManager = get()
+       sessionManager = get()
     ) }
 
 
@@ -102,6 +96,9 @@ val dataBase = module {
             sessionManager = get ()
         )
     }
+
+    single { SessionManager(get(), get()) }
+
 }
 
 val networkModule = module {

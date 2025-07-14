@@ -4,12 +4,14 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import org.catsproject.project.core.di.initKoin
 
-fun main() = application {
+fun main() {
     initKoin()
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "CatsCatalog",
-    ) {
-        App()
+    application {
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "CatsCatalog",
+        ) {
+            App()
+        }
     }
 }

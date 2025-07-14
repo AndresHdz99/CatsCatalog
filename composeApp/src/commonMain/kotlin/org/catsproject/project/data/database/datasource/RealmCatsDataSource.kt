@@ -12,7 +12,7 @@ import org.catsproject.project.data.database.models.CatsEntity
 import org.catsproject.project.data.database.models.FavoriteUserEntity
 
 class RealmCatsDataSource(
-    private val realm: Realm = RealmDatabase.realm
+    private val realm: Realm
 ) : CatsDataSource {
 
 
